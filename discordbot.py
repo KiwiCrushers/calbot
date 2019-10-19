@@ -1,5 +1,7 @@
 import discord, os, json, requests
 import Mods.calbot as calbot
+import Mods.Vision as vision
+
 
 with open("json/config.json") as h:
     config = json.load(h)
@@ -11,6 +13,8 @@ async def on_message(message):
         # If the message is a DM.
         for attachment in message.attachments:
             calbot.from_url(attachment.url)
+			#For each attatchment after calbot do vision.detect_labels(path), which returns all labels for the images
+
 
 @client.event
 async def on_ready():
