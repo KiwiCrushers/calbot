@@ -1,7 +1,13 @@
 import discord, os, json, requests
 import Mods.calbot as calbot
-import Mods.Vision as vision
+import Mods.vision as vision
 
+def check_food_for(item):
+	with open('FOOD.txt', 'r') as food:
+		if item in food:
+			return True
+		else:
+			return False
 
 with open("json/config.json") as h:
     config = json.load(h)
@@ -14,6 +20,7 @@ async def on_message(message):
         for attachment in message.attachments:
             calbot.from_url(attachment.url)
 			#For each attatchment after calbot do vision.detect_labels(path), which returns all labels for the images
+			#For each label check if label is food
 
 
 @client.event
