@@ -1,3 +1,4 @@
 discord.py
 wolframalpha
 requests
+google-cloud-vision
