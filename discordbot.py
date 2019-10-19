@@ -18,7 +18,7 @@ async def on_message(message):
     if type(message.channel).__name__ == "DMChannel":
         # If the message is a DM.
         for attachment in message.attachments:
-            calbot.from_url(attachment.url)
+            calbot.from_url(attachment.url, message.author.id)
 			#For each attatchment after calbot do vision.detect_labels(path), which returns all labels for the images
 			#For each label check if label is food
 
