@@ -1,4 +1,9 @@
 100 grand bar
+Redbull
+Red Bull
+Soda
+Sprite
+Cocacola
 15 bean soup
 3 musketeers 
 50/50 burger
@@ -6025,14 +6030,6 @@ directional selection
 diri ak djon djon
 dirt cake
 dirty rice
-disa 
-disanthus
-discada
-discaria
-dischidia
-discocactus
-discovery 
-dish 
 disney hunny b's honey-graham
 disney mickey's magix
 disocactus
@@ -11077,8 +11074,6 @@ leftovers
 legenophora
 legislative branch of colombia
 legousia
-legume
-legumes
 leguminosae
 leichhardtia australis
 leioa
@@ -21337,7 +21332,6 @@ yazd
 yeast
 yeast bread
 yeast extract
-yellow
 yellow bean sauce
 yellow bird 
 yellow curry
