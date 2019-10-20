@@ -55,7 +55,7 @@ features                                  :
     fontawesome_icon_name                 : adjust
   
   - title                                 : Feature List
-    description                           : Post pictures on social media with #CalBot and we will feature you in our social media.
+    description                           : Post pictures on social media with hashtag CalBot and we will feature you in our social media.
     fontawesome_icon_name                 : star
 
   - title                                 : Downloading/Unistalling
