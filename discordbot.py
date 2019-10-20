@@ -6,36 +6,22 @@ import Mods.calbot as calbot
 import Mods.vision as vision
 import Mods.calories as calories
 
-def check_food_for(item):
-	food = open("FOOD.txt").read()
-	if item in food:
-		return True
-	else:
-		return False
-
-
 with open("json/config.json") as h:
 	config = json.load(h)
 client = discord.Client()
-calories = calories.Client(config["wolfram"]["app_id"])
-
 
 @client.event
 async def on_message(message):
 	if type(message.channel).__name__ == "DMChannel":
 		# If the message is a DM.
 		for attachment in message.attachments:
-			filePath = calbot.from_url(
+			await message.channel.trigger_typing()
+			food = calbot.calories_from_url(
 				attachment.url, message.author.id, attachment.id)
-			calories_in_picture = 0
-			# replace path with the storage
-			for label in vision.detect_labels(filePath):
-				label = label.description.lower()
-				print(label)
-				if check_food_for(label):
-					cals = calories.ask(label)
-					print(cals)
-					calories_in_picture += int(cals)
+			foodEmbed = discord.Embed(title="New Food Added")
+			foodEmbed.add_field(name="Name", value=food["name"], inline=True)
+			foodEmbed.add_field(name="Calories", value=food["calories"], inline=True)
+			await message.channel.send(embed=foodEmbed)
 
 
 @client.event

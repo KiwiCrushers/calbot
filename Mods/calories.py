@@ -1,4 +1,5 @@
 import wolframalpha
+import Mods.vision as vision
 
 class Client(object):
     def __init__(self, key):
@@ -6,11 +7,10 @@ class Client(object):
         self.client = wolframalpha.Client(key)
 
     # Processes a user query.
-    def ask(self, queryText):
+    def calCount(self, queryText):
         res = self.client.query("calories in " + queryText)
         try:
             numCals = next(res.results).text.split()[0]
             return numCals
         except:
-            print("No calorie data.")
-            return 0
+            return "No calorie data."

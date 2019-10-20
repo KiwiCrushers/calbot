@@ -1,3 +1,6 @@
 {
-    "python.pythonPath": "c:\\Users\\carlo\\Documents\\GitHub\\calbot\\env\\Scripts\\python.exe"
+    "python.pythonPath": "c:\\Users\\carlo\\Documents\\GitHub\\calbot\\env\\Scripts\\python.exe",
+    "cSpell.words": [
+        "cals"
+    ]
 }
