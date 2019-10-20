@@ -4,13 +4,13 @@ import Mods.vision as vision
 import Mods.calories as calories
 
 wolfram = calories.Client(key)#Replace key with an actual key
-
+foodFile = open('FOOD.txt', 'r')
+food = foodFile.read()
 def check_food_for(item):
-	with open('FOOD.txt', 'r') as food:
-		if item in food:
-			return True
-		else:
-			return False
+	if item in food:
+		return True
+	else:
+		return False
 
 with open("json/config.json") as h:
     config = json.load(h)
