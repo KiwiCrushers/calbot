@@ -7,5 +7,10 @@ class Client(object):
 
     # Processes a user query.
     def ask(self, queryText):
-        res = self.client.query(queryText)
-        return next(res.results).text
+        res = self.client.query("calories in " + queryText)
+        try:
+            numCals = next(res.results).text.split()[0]
+            return numCals
+        except:
+            print("No calorie data.")
+            return 0

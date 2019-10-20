@@ -1,11 +1,13 @@
 def detect_labels(path):
     from google.cloud import vision
-    import io, json
+    import io
+    import json
 
     with open("json/config.json") as h:
-	config = json.load(h)
+        config = json.load(h)
 
-    client = vision.ImageAnnotatorClient.from_service_account_json(config["gcloud"]["tokenFile"])
+    client = vision.ImageAnnotatorClient.from_service_account_json(
+        config["gcloud"]["tokenFile"])
 
     with io.open(path, 'rb') as image_file:
         content = image_file.read()

@@ -7,6 +7,7 @@ import Mods.vision as vision
 import Mods.calories as calories
 
 def check_food_for(item):
+	food = open("FOOD.txt").read()
 	if item in food:
 		return True
 	else:
@@ -16,7 +17,7 @@ def check_food_for(item):
 with open("json/config.json") as h:
 	config = json.load(h)
 client = discord.Client()
-wolfram = calories.Client(config["wolfram"]["app_id"])
+calories = calories.Client(config["wolfram"]["app_id"])
 
 
 @client.event
@@ -32,9 +33,9 @@ async def on_message(message):
 				label = label.description.lower()
 				print(label)
 				if check_food_for(label):
-					cals = wolfram.ask('How many calories are in ' + label)
+					cals = calories.ask(label)
 					print(cals)
-					calories_in_picture += int(cals.split(' ')[0])
+					calories_in_picture += int(cals)
 
 
 @client.event
