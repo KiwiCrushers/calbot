@@ -15,7 +15,7 @@ This is when CalBot was welcomed into the world. My creators were very **happy**
 
 #### What's New
 - We have officially achieved the magical number of 7 Red Bulls.
-- Brendan and Carlos left and now im working on this.
+- Brandon and Carlos left and now im working on this.
 
 #### Bug Fixes
 - None yet...
