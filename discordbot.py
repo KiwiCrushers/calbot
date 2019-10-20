@@ -18,8 +18,15 @@ async def on_message(message):
 		listEmbed = discord.Embed(title="Food Eaten Today", color=0x049be0)
 		print(meals)
 		for meal in meals["list"]:
-			listEmbed.add_field(name=meal[2], value=str(meal[3]) + " Calories", inline=False)
-		listEmbed.set_footer(text="Total Calories: " + str(meals["total"]))
+			if str(meal[4]) != "No caffeine data.":
+				if int(meal[4]) == 0:
+					listEmbed.add_field(name=meal[2], value=str(meal[3]) + " Calories", inline=False)
+				else:
+					listEmbed.add_field(name=meal[2], value=str(meal[3]) + " Calories" + " " + str(meal[4]) + "mg Caffeine", inline=False)
+		if int(meals["caffeine"]) == 0:
+			listEmbed.set_footer(text="Total Calories: " + str(meals["total"]))
+		else:
+			listEmbed.set_footer(text="Total Calories: " + str(meals["total"]) + ". Total Caffeine: " + str(meals["caffeine"]))
 		await message.channel.send(embed=listEmbed)
 
 	if type(message.channel).__name__ == "DMChannel":
@@ -32,6 +39,9 @@ async def on_message(message):
 				foodEmbed = discord.Embed(title="New Food Added", color=0x368c36)
 				foodEmbed.add_field(name="Name", value=food["name"], inline=True)
 				foodEmbed.add_field(name="Calories", value=food["calories"], inline=True)
+				if str(food["caffeine"]) != "No caffeine data.":
+					if int(food["caffeine"]) != 0:
+						foodEmbed.add_field(name="Caffeine", value=food["caffeine"], inline=True)
 				await message.channel.send(embed=foodEmbed)
 
 

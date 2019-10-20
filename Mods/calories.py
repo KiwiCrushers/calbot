@@ -14,3 +14,11 @@ class Client(object):
             return int(numCals)
         except:
             return "No calorie data."
+
+	def cafCount(self, queryText):
+		res = self.client.query("caffeine in " + queryText)
+		try:
+			numCaf = next(res.results).text.split()[0]
+			return int(numCaf)
+		except:
+			return "No caffeine data."

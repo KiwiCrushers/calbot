@@ -17,13 +17,13 @@ def calories_from_url(url, userId, attachmentId):
     open(filePath, "wb").write(r.content)
 
     # Calculating the amount of calories.
-    foodData = calculate(filePath)
+	foodData = calculate(filePath)
     # Adding the entry into our database.
     conn = sqlite3.connect("db/database.db")
     c = conn.cursor()
     query = ("INSERT INTO meals VALUES ('"
     + datetime.datetime.now().isoformat() + "','"
-    + str(userId) + "','" + foodData["name"] + "','" + str(foodData["calories"])
+    + str(userId) + "','" + foodData["name"] + "','" + str(foodData["calories"]) + "''" + str(foodData["caffeine"])
     + "');")
     c.execute(query)
     conn.commit()
@@ -37,17 +37,20 @@ def food_today(userId):
     c.execute(query)
     allFood = c.fetchall()
     totalCals = 0
+	totalCaf = 0
     todayMeals = []
     for meal in allFood:
-        # For each food entry in the list.
-        if isinstance(meal[3], int):
-            # If number can't be added, don't add it.
-            totalCals += meal[3]
-        # Removing items that weren't today.
+		#iterate over all food, and make a table of food eaten today
         mealDate = datetime.datetime.strptime(meal[0], "%Y-%m-%dT%H:%M:%S.%f")
         if(datetime.datetime.date(mealDate) == datetime.datetime.date(datetime.datetime.today())):
             todayMeals.append(meal)
-    return {"list": todayMeals, "total": totalCals}
+	#iterate over all food eaten today and sum calorie + caffeine counts
+	for meal in todayMeals:
+		if isinstance(meal[3], int):
+			totalCals += meal[3]
+		if isinstance(meal[4], int):
+			totalCaf += meal[4]
+    return {"list": todayMeals, "total": totalCals, "caffeine": totalCaf}
 
 def calculate(filePath):
     totalCals = 0
@@ -60,9 +63,11 @@ def calculate(filePath):
             # If the object is a valid food.
             cals = calories.calCount(label)
             if cals != "No calorie data.":
+				caf = calories.cafCount(label)
                 print("Calories: " + str(cals))
-                return {"name": label, "calories": cals}
-    return {"name": "Cannot Recognize Food.", "calories": "No calorie data."}
+				print("Caffeine: " + str(caf))
+				return {"name": label, "calories": cals, "caffeine": caf}
+    return {"name": "Cannot Recognize Food.", "calories": "No calorie data.", "caffeine": "No caffeine data."}
 
 
 def check_food_for(item):
