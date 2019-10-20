@@ -21,26 +21,48 @@ def calories_from_url(url, userId, attachmentId):
     # Adding the entry into our database.
     conn = sqlite3.connect("db/database.db")
     c = conn.cursor()
-    c.execute("INSERT INTO meals VALUES ('"
+    query = ("INSERT INTO meals VALUES ('"
     + datetime.datetime.now().isoformat() + "','"
     + str(userId) + "','" + foodData["name"] + "','" + str(foodData["calories"])
     + "');")
+    c.execute(query)
     conn.commit()
     conn.close()
     return foodData
     
+def food_today(userId):
+    conn = sqlite3.connect("db/database.db")
+    c = conn.cursor()
+    query = "SELECT * FROM meals WHERE userId='" + str(userId) + "';"
+    c.execute(query)
+    allFood = c.fetchall()
+    totalCals = 0
+    todayMeals = []
+    for meal in allFood:
+        # For each food entry in the list.
+        if isinstance(meal[3], int):
+            # If number can't be added, don't add it.
+            totalCals += meal[3]
+        # Removing items that weren't today.
+        mealDate = datetime.datetime.strptime(meal[0], "%Y-%m-%dT%H:%M:%S.%f")
+        if(datetime.datetime.date(mealDate) == datetime.datetime.date(datetime.datetime.today())):
+            todayMeals.append(meal)
+    return {"list": todayMeals, "total": totalCals}
 
 def calculate(filePath):
     totalCals = 0
     # Getting the labels from Vision.
-    for label in vision.detect_labels(filePath):
+    labels = vision.detect_labels(filePath)
+    for label in labels:
         label = label.description.lower()
         if check_food_for(label):
             print("Food: " + label)
             # If the object is a valid food.
             cals = calories.calCount(label)
-            print("Calories: " + cals)
-            return {"name": label, "calories": cals}
+            if cals != "No calorie data.":
+                print("Calories: " + str(cals))
+                return {"name": label, "calories": cals}
+    return {"name": "Cannot Recognize Food.", "calories": "No calorie data."}
 
 
 def check_food_for(item):

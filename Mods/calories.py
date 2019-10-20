@@ -11,6 +11,6 @@ class Client(object):
         res = self.client.query("calories in " + queryText)
         try:
             numCals = next(res.results).text.split()[0]
-            return numCals
+            return int(numCals)
         except:
             return "No calorie data."
