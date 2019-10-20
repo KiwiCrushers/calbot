@@ -19,21 +19,20 @@ async def on_message(message):
 		print(meals)
 		for meal in meals["list"]:
 			listEmbed.add_field(name=meal[2], value=str(meal[3]) + " Calories", inline=False)
+		listEmbed.set_footer(text="Total Calories: " + str(meals["total"]))
 		await message.channel.send(embed=listEmbed)
-		totalEmbed = discord.Embed(title="Today's Totals", color=0x049be0)
-		totalEmbed.add_field(name="Calories", value=str(meals["total"]))
-		await message.channel.send(embed=totalEmbed)
 
 	if type(message.channel).__name__ == "DMChannel":
 		# If the message is a DM.
-		for attachment in message.attachments:
-			await message.channel.trigger_typing()
-			food = calbot.calories_from_url(
-				attachment.url, message.author.id, attachment.id)
-			foodEmbed = discord.Embed(title="New Food Added", color=0x368c36)
-			foodEmbed.add_field(name="Name", value=food["name"], inline=True)
-			foodEmbed.add_field(name="Calories", value=food["calories"], inline=True)
-			await message.channel.send(embed=foodEmbed)
+		async with message.channel.typing():
+			for attachment in message.attachments:
+				await message.channel.trigger_typing()
+				food = calbot.calories_from_url(
+					attachment.url, message.author.id, attachment.id)
+				foodEmbed = discord.Embed(title="New Food Added", color=0x368c36)
+				foodEmbed.add_field(name="Name", value=food["name"], inline=True)
+				foodEmbed.add_field(name="Calories", value=food["calories"], inline=True)
+				await message.channel.send(embed=foodEmbed)
 
 
 @client.event
