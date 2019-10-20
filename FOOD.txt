@@ -1229,10 +1229,12 @@ baijiu
 baik kut kyee kaik
 baikiaea
 bailan melon
-baileya 
+baileya
+soft drink
 bain-marie
 baingan bartha
 baingan bharta
+carbonated beverage
 bairrada doc
 baja med
 bajan pepper sauce
@@ -6904,7 +6906,6 @@ fasnachts
 fasolada
 fasoulya beyda
 fasoulya khadra
-fast food
 fastnachts
 fatalii
 fatayer
@@ -9317,7 +9318,6 @@ indian bread
 indian culture
 indian dairy products
 indian express
-indian fast food
 indian filter coffee
 indian gooseberry
 indian ice cream 
@@ -10972,7 +10972,6 @@ latka
 latke
 latkes
 latte
-latte art
 latte macchiato
 latteria
 latteria delebio
