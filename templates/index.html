@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//fonts.googleapis.com/css?family=Ubuntu"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>Calbot</h1>
+    <h3>HackFSU 2019</h3>
+    <div>
+      <div id="chatbox">
+        <p class="botText"><span>Hi! I'm Calbot. How can I help?</span></p>
+      </div>
+      <div id="userInput">
+        <input id="textInput" type="text" name="msg" placeholder="Message" />
+        <input id="buttonInput" type="submit" />
+        <label for="buttonInput" class="custom-button">
+          <i class="fa fa-paper-plane"></i>
+        </label>
+        <label for="file-upload" class="custom-button">
+          <i class="fa fa-paperclip fa-7x"></i>
+        </label>
+        <form target="_blank" id="fileForm" method="POST" enctype="multipart/form-data">
+          <input id="file-upload" type="file" name="file" />
+        </form>
+      </div>
+
+      <!--JAVASCRIPT CODE-->
+      <script>
+        /**
+         * Creates a bot message element with the given text.
+         */
+        function setBotMessage(text) {
+          var botHtml = '<p class="botText"><span>' + text + "</span></p>";
+          $("#chatbox").append(botHtml);
+          document
+            .getElementById("userInput")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+        }
+        /**
+         * Creates a user message element with the given text.
+         */
+        function setUserMessage(text) {
+          var userHtml = '<p class="userText"><span>' + text + "</span></p>";
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document
+            .getElementById("userInput")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+        }
+        /**
+         * Queries the backend for a response.
+         */
+        function getBotResponse(query) {
+          var rawText = query;
+          $.get("/get", { msg: rawText }).done(function(data) {
+            if (data.includes("\n")) {
+              for (i = 0; i < data.length; i++) {
+                if (data[i] == "\n") {
+                  var botHtml =
+                    '<p class="botText"><span>' +
+                    data.substring(0, i) +
+                    "</span></p>";
+                  $("#chatbox").append(botHtml);
+                  document
+                    .getElementById("userInput")
+                    .scrollIntoView({ block: "start", behavior: "smooth" });
+                  data = data.substring(i + 1);
+                  i = 0;
+                }
+              }
+            }
+            // Opens a new window if the return statement is a website.
+            else if (data.includes("https://")) {
+              window.open(data);
+            } else {
+              // Generates text box with the returned value.
+              setBotMessage(data);
+            }
+          });
+        }
+        /**
+         * Retrieves the text inside the text field.
+         */
+        function getTextField() {
+          text = $("#textInput").val();
+          setUserMessage(text);
+          text = text.replace("$", "");
+          getBotResponse(text);
+          $("#textInput").val("");
+        }
+
+        /**
+         * Runs when the enter key is pressed.
+         */
+        $("#textInput").keypress(function(e) {
+          if (e.which == 13) {
+            getTextField();
+          }
+        });
+        /**
+         * Runs when the send button is pressed.
+         */
+        $("#buttonInput").click(function() {
+          getTextField();
+        });
+
+        function getNutrition(fileName){
+          alert(fileName + " uploaded successfully.");
+          setBotMessage("Processing...");
+          $.get("/img", {file: fileName}).done(function(response){
+            data = JSON.parse(response);
+            setBotMessage("Food: " + data.name);
+            setBotMessage("Calories: " + data.calories);
+            if(data.caffeine > 0){
+              setBotMessage("Caffeine: " + data.caffeine + "mg")
+            }
+          });
+        }
+        /**
+         * Runs when a file is submitted through the upload button.
+         */
+        document.getElementById("file-upload").onchange = function() {
+          fileName = this.value.replace("C:\\fakepath\\", "");
+          mainPage = window.location
+          document.getElementById("fileForm").submit();
+          while(window.location != mainPage){
+            alert("Not");
+          }
+          setTimeout(function(){
+            getNutrition(fileName);
+          }, 0);
+        }
+      </script>
+    </div>
+  </body>
+</html>

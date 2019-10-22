@@ -1,0 +1,200 @@
+body {
+  font-family: Roboto;
+  background-color: #edebea;
+}
+
+h1 {
+  color: black;
+  margin-bottom: 0;
+  margin-top: 0;
+  text-align: center;
+  font-size: 12vw;
+}
+
+h3 {
+  color: black;
+  font-size: 6vw;
+  margin-top: 3px;
+  text-align: center;
+}
+
+#chatbox {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  margin-top: 60px;
+}
+
+#userInput {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  margin-top: 60px;
+}
+
+#textInput {
+  height: 10vw;
+  width: 70%;
+  border: none;
+  border-bottom: 3px solid #ceb888;
+  font-family: Roboto;
+  font-size: 6vw;
+  align-content: center;
+}
+
+/* #buttonInput {
+  padding: 3px;
+  font-family: Roboto;
+  font-size: 6vw;
+} */
+
+.userText {
+  color: black;
+  font-family: Roboto;
+  font-size: 6vw;
+  text-align: right;
+  line-height: 12vw;
+}
+
+.userText span {
+  background-color: #ceb888;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.botText {
+  color: white;
+  font-family: Roboto;
+  font-size: 6vw;
+  text-align: left;
+  line-height: 12vw;
+}
+
+.botText span {
+  background-color: #782f40;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+input[type="submit"] {
+  visibility: hidden;
+  display: none;
+}
+.custom-button {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 6vw;
+}
+
+#tidbit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 500px;
+}
+
+@media screen and (min-width: 1250px) {
+  body {
+    font-family: Roboto;
+  }
+
+  h1 {
+    color: black;
+    margin-bottom: 0;
+    margin-top: 0;
+    text-align: center;
+    font-size: 40px;
+  }
+
+  h3 {
+    color: black;
+    font-size: 20px;
+    margin-top: 3px;
+    text-align: center;
+  }
+
+  #chatbox {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-top: 60px;
+  }
+
+  #userInput {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    margin-top: 60px;
+  }
+
+  #textInput {
+    height: 20px;
+    width: 87%;
+    border: none;
+    border-bottom: 3px solid #ceb888;
+    font-family: Roboto;
+    font-size: 17px;
+  }
+
+  /* #buttonInput {
+    padding: 3px;
+    font-family: Roboto;
+    font-size: 17px;
+  } */
+
+  input[type="file"] {
+    display: none;
+  }
+  input[type="submit"] {
+    visibility: hidden;
+    display: none;
+  }
+  .custom-button {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 17px;
+  }
+
+  .userText {
+    color: black;
+    font-family: Roboto;
+    font-size: 17px;
+    text-align: right;
+    line-height: 30px;
+  }
+
+  .userText span {
+    background-color: #ceb888;
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  .botText {
+    color: white;
+    font-family: Roboto;
+    font-size: 17px;
+    text-align: left;
+    line-height: 30px;
+  }
+
+  .botText span {
+    background-color: #782f40;
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  #tidbit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+  }
+}
