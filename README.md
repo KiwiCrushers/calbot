@@ -18,4 +18,4 @@ In less than 24 hours, we built an entirely native intelligent chatting interfac
 ## What we learned
 Throughout this experience, we learned efficient use of the Google Cloud suite of products, advanced version control with several team members, and basic natural language processing in order to parse the necessary commands for CalBot to operate efficiently. 
 ## What's next for CalBot
-We plan to release our technology in an open source fashion to allow for the developer community to enhance CalBot and use its technologies for the general improvement of the general population health. And to begin tackling one of the most troubling population threats in the United States
+We plan to release our technology in an open source fashion to allow for the developer community to enhance CalBot and use its technologies for the general improvement of the general population health. And to begin tackling one of the most troubling population threats in the United States.
